@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Anniversary</title>
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #ffe0ec, #fff0f5);
+      font-family: 'Arial', sans-serif;
+      text-align: center;
+      padding: 50px;
+      color: #333;
+    }
+    h1 {
+      font-size: 36px;
+      color: #d63384;
+    }
+    .heart {
+      font-size: 80px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      margin-top: 20px;
+    }
+    .heart:hover {
+      transform: scale(1.2);
+    }
+    #message {
+      display: none;
+      margin-top: 40px;
+      font-size: 20px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Happy 1st Anniversary, My Love 💖</h1>
+  <p>Click the heart to reveal your surprise</p>
+  <div class="heart" onclick="showMessage()">❤️</div>
+
+  <div id="message">
+    <p>
+      My love, thank you for sticking with me even from miles away.  
+      You’ve always understood me, never asked for more than I could give,  
+      and I’ll never forget how patient and kind you’ve been.  
+      This might just be a simple page, but it’s built from my heart.  
+      I love you, and one day, I’ll make it up to you — I promise. 💌
+    </p>
+    <p>— Your boyfriend, [Your Name]</p>
+  </div>
+
+  <script>
+    function showMessage() {
+      document.getElementById("message").style.display = "block";
+    }
+  </script>
+
+</body>
+</html>
