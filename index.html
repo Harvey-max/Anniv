@@ -10,8 +10,8 @@
 
   <!-- Intro Screen -->
   <div id="intro-screen">
-    <h1>Click if you love me 💚</h1>
-    <button id="start-btn">💚 Start</button>
+    <img src="click-image.jpg" id="intro-image" alt="Click Image" />
+    <p class="click-text">CLICK!</p>
   </div>
 
   <!-- Main Container -->
@@ -64,7 +64,7 @@
   </div>
 
   <script>
-    const startBtn = document.getElementById('start-btn');
+    const introImage = document.getElementById('intro-image');
     const introScreen = document.getElementById('intro-screen');
     const mainContent = document.getElementById('main-content');
     const cards = document.querySelectorAll('.song-card');
@@ -72,7 +72,7 @@
     const nextBtn = document.getElementById('next');
     let current = 0;
 
-    startBtn.addEventListener('click', () => {
+    introImage.addEventListener('click', () => {
       introScreen.style.display = 'none';
       mainContent.style.display = 'flex';
     });
