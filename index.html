@@ -3,100 +3,97 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Our Anniversary 💚</title>
-  <link rel="stylesheet" href="style.css"/>
+  <title>Our Spotify Love Story</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
-  <!-- Intro Screen -->
-  <div id="intro-screen">
-    <img src="click-image.jpg" id="intro-image" alt="Click Image" />
-    <p class="click-text">CLICK!</p>
+  <div class="intro" id="intro">
+    <img src="your-image.jpg" alt="Click image" class="click-image" onclick="startStory()"/>
+    <p>CLICK!</p>
   </div>
 
-  <!-- Main Container -->
-  <div class="container" id="main-content" style="display: none;">
-    <div class="song-card active">
-      <img src="cover1.jpg" class="cover" />
-      <h2>Song Title 1</h2>
-      <p class="lyrics">"Your lyrics here..."</p>
-      <p class="message">Your sweet message here</p>
-      <audio controls src="audio1.mp3"></audio>
+  <div class="container hidden" id="mainContent">
+    <div class="slide active">
+      <h2>🎵 Palagi - TJ Monterde</h2>
+      <p>"Hindi mo man ako laging kasama<br>Asahan mong ako'y laging nandiyan..."</p>
+      <p>I'll always be with you, even from miles away. I love you forever.</p>
     </div>
 
-    <div class="song-card">
-      <img src="cover2.jpg" class="cover" />
-      <h2>Song Title 2</h2>
-      <p class="lyrics">"Your lyrics here..."</p>
-      <p class="message">Your sweet message here</p>
-      <audio controls src="audio2.mp3"></audio>
+    <div class="slide">
+      <h2>🎵 Until I Found You - Stephen Sanchez</h2>
+      <p>"I would never fall in love again until I found her..."</p>
+      <p>You made me believe in love again. Thank you for everything.</p>
     </div>
 
-    <div class="song-card">
-      <img src="cover3.jpg" class="cover" />
-      <h2>Song Title 3</h2>
-      <p class="lyrics">"Your lyrics here..."</p>
-      <p class="message">Your sweet message here</p>
-      <audio controls src="audio3.mp3"></audio>
+    <div class="slide">
+      <h2>🎵 Every Summertime - NIKI</h2>
+      <p>"Every year we get older and I'm still on your side..."</p>
+      <p>One year down, forever to go. Happy anniversary!</p>
     </div>
 
-    <div class="song-card">
-      <img src="cover4.jpg" class="cover" />
-      <h2>Song Title 4</h2>
-      <p class="lyrics">"Your lyrics here..."</p>
-      <p class="message">Your sweet message here</p>
-      <audio controls src="audio4.mp3"></audio>
+    <div class="slide">
+      <h2>🎵 12:51 - Krissy & Ericka</h2>
+      <p>"And I wish you never left me behind..."</p>
+      <p>Even when we're apart, you’re the only one I think of.</p>
     </div>
 
-    <div class="song-card">
-      <img src="cover5.jpg" class="cover" />
-      <h2>Song Title 5</h2>
-      <p class="lyrics">"Your lyrics here..."</p>
-      <p class="message">Your sweet message here</p>
-      <audio controls src="audio5.mp3"></audio>
+    <div class="slide">
+      <h2>🎵 I Will Always Love You - Whitney Houston</h2>
+      <p>"I hope life treats you kind, and I hope you have all you've dreamed of..."</p>
+      <p>I may not have much now, but one day, I’ll give you everything.</p>
     </div>
 
-    <!-- Navigation -->
     <div class="nav">
-      <button id="prev">💚</button>
-      <button id="next">💚</button>
+      <button onclick="prevSlide()">💚</button>
+      <div class="dots" id="dots"></div>
+      <button onclick="nextSlide()">💚</button>
     </div>
   </div>
 
   <script>
-    const introImage = document.getElementById('intro-image');
-    const introScreen = document.getElementById('intro-screen');
-    const mainContent = document.getElementById('main-content');
-    const cards = document.querySelectorAll('.song-card');
-    const prevBtn = document.getElementById('prev');
-    const nextBtn = document.getElementById('next');
-    let current = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dotsContainer = document.getElementById('dots');
+    let currentSlide = 0;
 
-    introImage.addEventListener('click', () => {
-      introScreen.style.display = 'none';
-      mainContent.style.display = 'flex';
-    });
-
-    function showCard(index) {
-      cards.forEach((card, i) => {
-        card.classList.remove('active');
-        card.style.display = 'none';
+    function updateSlides() {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === currentSlide);
       });
-      cards[index].classList.add('active');
-      cards[index].style.display = 'flex';
+
+      const dots = document.querySelectorAll('.dot');
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
+      });
     }
 
-    prevBtn.addEventListener('click', () => {
-      current = (current - 1 + cards.length) % cards.length;
-      showCard(current);
-    });
+    function createDots() {
+      slides.forEach((_, i) => {
+        const dot = document.createElement('span');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => {
+          currentSlide = i;
+          updateSlides();
+        });
+        dotsContainer.appendChild(dot);
+      });
+    }
 
-    nextBtn.addEventListener('click', () => {
-      current = (current + 1) % cards.length;
-      showCard(current);
-    });
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      updateSlides();
+    }
 
-    showCard(current);
+    function prevSlide() {
+      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+      updateSlides();
+    }
+
+    function startStory() {
+      document.getElementById('intro').style.display = 'none';
+      document.getElementById('mainContent').classList.remove('hidden');
+    }
+
+    createDots();
   </script>
 </body>
 </html>
