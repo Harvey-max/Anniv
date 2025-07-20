@@ -1,128 +1,105 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
-
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(to right, #1db954, #191414);
+  font-family: 'Helvetica Neue', sans-serif;
+  background: #191414;
   color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
 }
 
-#intro-screen {
+.intro {
   text-align: center;
-  animation: fadeIn 1s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
 }
 
-#intro-image {
+.click-image {
   width: 200px;
   height: auto;
   cursor: pointer;
-  border-radius: 15px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  border-radius: 50%;
+  transition: transform 0.3s ease;
 }
 
-.click-text {
-  margin-top: 15px;
+.click-image:hover {
+  transform: scale(1.1);
+}
+
+.intro p {
   font-size: 24px;
-  color: white;
-  font-weight: bold;
-  animation: pulse 1.2s infinite;
-}
-
-@keyframes pulse {
-  0% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.1); opacity: 0.8; }
-  100% { transform: scale(1); opacity: 1; }
+  margin-top: 10px;
+  color: #1DB954;
 }
 
 .container {
-  flex-direction: column;
-  align-items: center;
   text-align: center;
-  width: 90%;
   max-width: 600px;
+  padding: 20px;
+  transition: opacity 0.5s ease-in-out;
 }
 
-.song-card {
+.hidden {
   display: none;
-  flex-direction: column;
-  align-items: center;
-  animation: fadeIn 0.6s ease forwards;
-  transition: opacity 0.6s ease;
-  padding: 30px;
-  border-radius: 15px;
 }
 
-.song-card.active {
-  display: flex;
+.slide {
+  display: none;
+  animation: fade 0.5s ease-in-out;
 }
 
-.cover {
-  width: 200px;
-  height: 200px;
-  border-radius: 20px;
-  object-fit: cover;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
-  margin-bottom: 20px;
+.slide.active {
+  display: block;
 }
 
-h2 {
-  font-size: 24px;
-  margin: 10px 0;
-}
-
-.lyrics {
-  font-style: italic;
-  margin: 10px 0;
-}
-
-.message {
-  margin: 10px 0;
-  font-weight: 300;
-}
-
-audio {
-  margin-top: 15px;
-  width: 100%;
+.slide h2 {
+  color: #1DB954;
+  margin-bottom: 10px;
 }
 
 .nav {
   margin-top: 20px;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  align-items: center;
+  gap: 15px;
 }
 
 .nav button {
+  background-color: transparent;
+  border: 2px solid #1DB954;
+  color: #1DB954;
   font-size: 24px;
-  padding: 10px 20px;
-  background-color: #1db954;
-  border: none;
-  border-radius: 50px;
+  border-radius: 50%;
+  padding: 10px;
   cursor: pointer;
-  color: white;
-  transition: transform 0.3s ease;
+  transition: background 0.3s ease;
 }
 
 .nav button:hover {
-  transform: scale(1.1);
+  background-color: #1DB954;
+  color: #191414;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.dots {
+  display: flex;
+  gap: 10px;
+}
+
+.dot {
+  height: 12px;
+  width: 12px;
+  background-color: #888;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+.dot.active {
+  background-color: #1DB954;
+}
+
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
