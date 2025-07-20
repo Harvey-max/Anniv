@@ -3,41 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Our Album — Anniversary Gift</title>
+  <title>Anniversary Album</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>For My Love 💖</h1>
-    <p>Happy 1st Anniversary! Every song here tells a piece of our story.</p>
-  </header>
+  <div class="slider">
+    <!-- Slide 1 -->
+    <section class="slide">
+      <img src="images/palagi.jpg" alt="Palagi cover" class="album-cover" />
+      <h2 class="lyric">"Kaya ikaw pa rin ang sigaw ng puso, palagi..."</h2>
+      <p class="message">This song always makes me think of you. Even miles away, you're here with me — palagi.</p>
+      <audio controls autoplay loop>
+        <source src="audio/palagi.mp3" type="audio/mpeg" />
+        Your browser doesn't support audio.
+      </audio>
+    </section>
 
-  <!-- 💿 Song Section 1 -->
-  <section class="album-section">
-    <img src="images/palagi.jpg" alt="Palagi cover" class="album-cover" />
-    <h2 class="lyric">"Kaya ikaw pa rin ang sigaw ng puso, palagi..."</h2>
-    <p class="message">This song always makes me think of you. Even miles away, you're here with me — palagi.</p>
-    <audio controls autoplay loop>
-      <source src="audio/palagi.mp3" type="audio/mpeg" />
-      Your browser doesn't support audio.
-    </audio>
-  </section>
+    <!-- Slide 2 -->
+    <section class="slide">
+      <img src="images/alwaysloveu.jpg" alt="I Will Always Love You" class="album-cover" />
+      <h2 class="lyric">"I will always love you..."</h2>
+      <p class="message">No matter what, my love for you is constant. I’ll always love you — that’s a promise.</p>
+      <audio controls loop>
+        <source src="audio/alwaysloveu.mp3" type="audio/mpeg" />
+        Your browser doesn't support audio.
+      </audio>
+    </section>
 
-  <!-- 💿 Song Section 2 -->
-  <section class="album-section">
-    <img src="images/alwaysloveu.jpg" alt="I Will Always Love You" class="album-cover" />
-    <h2 class="lyric">"I will always love you..."</h2>
-    <p class="message">No matter what, my love for you is constant. I’ll always love you — that’s a promise.</p>
-    <audio controls loop>
-      <source src="audio/alwaysloveu.mp3" type="audio/mpeg" />
-      Your browser doesn't support audio.
-    </audio>
-  </section>
+    <!-- Add more slides below -->
 
-  <!-- ✨ Add more sections here with new songs -->
+  </div>
 
-  <footer>
-    <p>Made with all my heart, for you 💘</p>
-  </footer>
+  <!-- Navigation buttons -->
+  <div class="nav-buttons">
+    <button onclick="plusSlides(-1)">&#10094;</button>
+    <button onclick="plusSlides(1)">&#10095;</button>
+  </div>
+
+  <script>
+    let slideIndex = 0;
+    const slides = document.getElementsByClassName("slide");
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+      slides[slideIndex].style.display = "none";
+      slideIndex = (slideIndex + n + slides.length) % slides.length;
+      showSlides(slideIndex);
+    }
+
+    function showSlides(n) {
+      for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      slides[n].style.display = "block";
+    }
+  </script>
 </body>
 </html>
