@@ -1,99 +1,329 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Our Spotify Love Story</title>
-  <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Story - 1st Anniversary</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .spotify-green { color: #1DB954; }
+        .bg-spotify-green { background-color: #1DB954; }
+        .border-spotify-green { border-color: #1DB954; }
+        
+        .slide-enter {
+            opacity: 0;
+            transform: translateX(100px);
+        }
+        
+        .slide-active {
+            opacity: 1;
+            transform: translateX(0);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .slide-exit {
+            opacity: 0;
+            transform: translateX(-100px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .heart-beat {
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+        
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .glow {
+            box-shadow: 0 0 20px rgba(29, 185, 84, 0.3);
+        }
+        
+        .lyrics-text {
+            font-style: italic;
+            line-height: 1.8;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+    </style>
 </head>
-<body>
-  <div class="intro" id="intro">
-    <img src="your-image.jpg" alt="Click image" class="click-image" onclick="startStory()"/>
-    <p>CLICK!</p>
-  </div>
-
-  <div class="container hidden" id="mainContent">
-    <div class="slide active">
-      <h2>🎵 Palagi - TJ Monterde</h2>
-      <p>"Hindi mo man ako laging kasama<br>Asahan mong ako'y laging nandiyan..."</p>
-      <p>I'll always be with you, even from miles away. I love you forever.</p>
+<body class="bg-black text-white overflow-hidden">
+    <!-- Intro Page -->
+    <div id="introPage" class="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 via-black to-gray-800">
+        <div class="text-center fade-in">
+            <div class="mb-8">
+                <div class="w-64 h-64 mx-auto bg-gradient-to-br from-spotify-green to-green-600 rounded-full flex items-center justify-center mb-6 glow heart-beat cursor-pointer hover:scale-105 transition-transform duration-300" onclick="startJourney()">
+                    <svg class="w-24 h-24 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 spotify-green">Our Love Story</h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-8">A Year of Beautiful Moments</p>
+                <button onclick="startJourney()" class="bg-spotify-green hover:bg-green-600 text-black font-semibold py-4 px-8 rounded-full text-xl transition-all duration-300 hover:scale-105 glow">
+                    CLICK!
+                </button>
+            </div>
+        </div>
     </div>
 
-    <div class="slide">
-      <h2>🎵 Until I Found You - Stephen Sanchez</h2>
-      <p>"I would never fall in love again until I found her..."</p>
-      <p>You made me believe in love again. Thank you for everything.</p>
+    <!-- Main Player Interface -->
+    <div id="playerInterface" class="hidden min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800">
+        <!-- Header -->
+        <div class="flex items-center justify-between p-6 border-b border-gray-700">
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 bg-spotify-green rounded-full flex items-center justify-center">
+                    <svg class="w-6 h-6 text-black" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="text-xl font-semibold">Our Anniversary Playlist</h2>
+                    <p class="text-gray-400">5 songs • 1 year of love</p>
+                </div>
+            </div>
+            <div class="spotify-green font-semibold">
+                <span id="currentTrack">1</span> / 5
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 p-8">
+            <div class="max-w-4xl mx-auto">
+                <!-- Slide Container -->
+                <div id="slideContainer" class="relative">
+                    <!-- Slide 1: First Meeting -->
+                    <div class="slide slide-active" data-slide="1">
+                        <div class="text-center">
+                            <div class="w-80 h-80 mx-auto mb-8 bg-gradient-to-br from-pink-500 to-purple-600 rounded-lg flex items-center justify-center text-6xl shadow-2xl">
+                                💕
+                            </div>
+                            <h3 class="text-3xl font-bold mb-6 spotify-green">Track 1: "First Glance"</h3>
+                            <div class="lyrics-text text-lg mb-8 text-gray-300 max-w-2xl mx-auto">
+                                "In a crowded room, I saw your smile<br>
+                                Time stood still for a little while<br>
+                                Little did I know that very day<br>
+                                You'd steal my heart and never give it back"
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-6 max-w-2xl mx-auto">
+                                <p class="text-white text-lg leading-relaxed">
+                                    Remember when we first met? I was so nervous, but your laugh made everything feel right. That moment when our eyes met across the room - I knew something special was beginning. ❤️
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: First Date -->
+                    <div class="slide slide-enter hidden" data-slide="2">
+                        <div class="text-center">
+                            <div class="w-80 h-80 mx-auto mb-8 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-lg flex items-center justify-center text-6xl shadow-2xl">
+                                🌙
+                            </div>
+                            <h3 class="text-3xl font-bold mb-6 spotify-green">Track 2: "Moonlight Serenade"</h3>
+                            <div class="lyrics-text text-lg mb-8 text-gray-300 max-w-2xl mx-auto">
+                                "Under stars we walked and talked<br>
+                                About our dreams, our fears unlocked<br>
+                                Your hand in mine felt so right<br>
+                                Perfect ending to perfect night"
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-6 max-w-2xl mx-auto">
+                                <p class="text-white text-lg leading-relaxed">
+                                    Our first date was magical! Walking under the moonlight, sharing stories and dreams. I loved how comfortable we felt together, like we'd known each other forever. 🌟
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3: Becoming Official -->
+                    <div class="slide slide-enter hidden" data-slide="3">
+                        <div class="text-center">
+                            <div class="w-80 h-80 mx-auto mb-8 bg-gradient-to-br from-red-500 to-pink-600 rounded-lg flex items-center justify-center text-6xl shadow-2xl">
+                                💖
+                            </div>
+                            <h3 class="text-3xl font-bold mb-6 spotify-green">Track 3: "You're Mine"</h3>
+                            <div class="lyrics-text text-lg mb-8 text-gray-300 max-w-2xl mx-auto">
+                                "Three little words changed everything<br>
+                                'Will you be mine?' made my heart sing<br>
+                                Yes was all I had to say<br>
+                                To start our love story today"
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-6 max-w-2xl mx-auto">
+                                <p class="text-white text-lg leading-relaxed">
+                                    The day we became official! I was so happy when you asked me to be yours. My heart was racing, but I knew without a doubt - yes, always yes! 💕
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4: Adventures Together -->
+                    <div class="slide slide-enter hidden" data-slide="4">
+                        <div class="text-center">
+                            <div class="w-80 h-80 mx-auto mb-8 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-lg flex items-center justify-center text-6xl shadow-2xl">
+                                🌈
+                            </div>
+                            <h3 class="text-3xl font-bold mb-6 spotify-green">Track 4: "Adventure Song"</h3>
+                            <div class="lyrics-text text-lg mb-8 text-gray-300 max-w-2xl mx-auto">
+                                "Every day's an adventure with you<br>
+                                Simple moments feel brand new<br>
+                                Laughing, dancing, being free<br>
+                                You're the perfect company"
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-6 max-w-2xl mx-auto">
+                                <p class="text-white text-lg leading-relaxed">
+                                    All our adventures this year - from spontaneous coffee dates to weekend getaways. Every moment with you feels like a new discovery. You make ordinary days extraordinary! 🎉
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 5: One Year Anniversary -->
+                    <div class="slide slide-enter hidden" data-slide="5">
+                        <div class="text-center">
+                            <div class="w-80 h-80 mx-auto mb-8 bg-gradient-to-br from-spotify-green to-emerald-600 rounded-lg flex items-center justify-center text-6xl shadow-2xl">
+                                🎊
+                            </div>
+                            <h3 class="text-3xl font-bold mb-6 spotify-green">Track 5: "Forever Starts Today"</h3>
+                            <div class="lyrics-text text-lg mb-8 text-gray-300 max-w-2xl mx-auto">
+                                "One year down, forever to go<br>
+                                Our love continues to grow<br>
+                                Through every season, every day<br>
+                                I choose you in every way"
+                            </div>
+                            <div class="bg-gray-800 rounded-lg p-6 max-w-2xl mx-auto">
+                                <p class="text-white text-lg leading-relaxed">
+                                    Happy 1st Anniversary, my love! This year has been the most beautiful chapter of my life. Here's to many more years of laughter, love, and endless adventures together. I love you more than words can say! 💝
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="flex justify-center items-center space-x-8 mt-12">
+                    <button id="prevBtn" onclick="previousSlide()" class="w-16 h-16 bg-gray-700 hover:bg-gray-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-8 h-8 text-red-400" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    </button>
+                    
+                    <div class="flex space-x-2">
+                        <div class="w-3 h-3 rounded-full bg-spotify-green dot" data-slide="1"></div>
+                        <div class="w-3 h-3 rounded-full bg-gray-600 dot" data-slide="2"></div>
+                        <div class="w-3 h-3 rounded-full bg-gray-600 dot" data-slide="3"></div>
+                        <div class="w-3 h-3 rounded-full bg-gray-600 dot" data-slide="4"></div>
+                        <div class="w-3 h-3 rounded-full bg-gray-600 dot" data-slide="5"></div>
+                    </div>
+                    
+                    <button id="nextBtn" onclick="nextSlide()" class="w-16 h-16 bg-gray-700 hover:bg-gray-600 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110">
+                        <svg class="w-8 h-8 text-red-400" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="slide">
-      <h2>🎵 Every Summertime - NIKI</h2>
-      <p>"Every year we get older and I'm still on your side..."</p>
-      <p>One year down, forever to go. Happy anniversary!</p>
-    </div>
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 5;
 
-    <div class="slide">
-      <h2>🎵 12:51 - Krissy & Ericka</h2>
-      <p>"And I wish you never left me behind..."</p>
-      <p>Even when we're apart, you’re the only one I think of.</p>
-    </div>
+        function startJourney() {
+            document.getElementById('introPage').classList.add('hidden');
+            document.getElementById('playerInterface').classList.remove('hidden');
+            updateNavigation();
+        }
 
-    <div class="slide">
-      <h2>🎵 I Will Always Love You - Whitney Houston</h2>
-      <p>"I hope life treats you kind, and I hope you have all you've dreamed of..."</p>
-      <p>I may not have much now, but one day, I’ll give you everything.</p>
-    </div>
+        function showSlide(slideNumber) {
+            // Hide all slides
+            document.querySelectorAll('.slide').forEach(slide => {
+                slide.classList.add('hidden');
+                slide.classList.remove('slide-active');
+                slide.classList.add('slide-enter');
+            });
 
-    <div class="nav">
-      <button onclick="prevSlide()">💚</button>
-      <div class="dots" id="dots"></div>
-      <button onclick="nextSlide()">💚</button>
-    </div>
-  </div>
+            // Show current slide
+            const currentSlideElement = document.querySelector(`[data-slide="${slideNumber}"]`);
+            currentSlideElement.classList.remove('hidden', 'slide-enter');
+            currentSlideElement.classList.add('slide-active');
 
-  <script>
-    const slides = document.querySelectorAll('.slide');
-    const dotsContainer = document.getElementById('dots');
-    let currentSlide = 0;
+            // Update track counter
+            document.getElementById('currentTrack').textContent = slideNumber;
 
-    function updateSlides() {
-      slides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === currentSlide);
-      });
+            // Update dots
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                if (index + 1 === slideNumber) {
+                    dot.classList.remove('bg-gray-600');
+                    dot.classList.add('bg-spotify-green');
+                } else {
+                    dot.classList.remove('bg-spotify-green');
+                    dot.classList.add('bg-gray-600');
+                }
+            });
 
-      const dots = document.querySelectorAll('.dot');
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('active', i === currentSlide);
-      });
-    }
+            updateNavigation();
+        }
 
-    function createDots() {
-      slides.forEach((_, i) => {
-        const dot = document.createElement('span');
-        dot.className = 'dot' + (i === 0 ? ' active' : '');
-        dot.addEventListener('click', () => {
-          currentSlide = i;
-          updateSlides();
+        function nextSlide() {
+            if (currentSlide < totalSlides) {
+                currentSlide++;
+                showSlide(currentSlide);
+            }
+        }
+
+        function previousSlide() {
+            if (currentSlide > 1) {
+                currentSlide--;
+                showSlide(currentSlide);
+            }
+        }
+
+        function updateNavigation() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            prevBtn.disabled = currentSlide === 1;
+            nextBtn.disabled = currentSlide === totalSlides;
+
+            if (currentSlide === 1) {
+                prevBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                prevBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+
+            if (currentSlide === totalSlides) {
+                nextBtn.classList.add('opacity-50', 'cursor-not-allowed');
+            } else {
+                nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' && currentSlide < totalSlides) {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' && currentSlide > 1) {
+                previousSlide();
+            }
         });
-        dotsContainer.appendChild(dot);
-      });
-    }
 
-    function nextSlide() {
-      currentSlide = (currentSlide + 1) % slides.length;
-      updateSlides();
-    }
-
-    function prevSlide() {
-      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-      updateSlides();
-    }
-
-    function startStory() {
-      document.getElementById('intro').style.display = 'none';
-      document.getElementById('mainContent').classList.remove('hidden');
-    }
-
-    createDots();
-  </script>
-</body>
+        // Initialize
+        updateNavigation();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9620ed55d3cb0719',t:'MTc1Mjk5ODQ0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
