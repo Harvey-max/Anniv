@@ -234,11 +234,8 @@
                     </div>
 
                     <!-- Slide 5: Ending -->
-<div class="slide flex flex-col justify-center items-center text-center px-6" data-slide="5">
-    <audio autoplay loop>
-    <source src="N1PT.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+<div class="slide flex flex-col justify-center items-center text-center px-6" data-slide="6">
+    <audio id="finalAudio" src="N1PT.mp3" preload="auto"></audio>
   <h3 class="text-3xl font-bold mb-6 spotify-green">Until the Next Song...</h3>
   <p class="text-white text-lg leading-relaxed max-w-2xl">
     If forever exists in a song, I hope it plays on repeat with you.<br><br>
@@ -278,7 +275,7 @@
 
     <script>
     let currentSlide = 1;
-    const totalSlides = 5;
+    const totalSlides = 6; // 🔄 updated to 6 slides
 
     function startJourney() {
         document.getElementById('introPage').classList.add('hidden');
@@ -290,12 +287,12 @@
         const audios = document.querySelectorAll("audio");
         audios.forEach(audio => {
             audio.pause();
-            audio.currentTime = 0; // Optional: reset to start
+            audio.currentTime = 0; // reset
         });
     }
 
     function showSlide(slideNumber) {
-        pauseAllAudio(); // 🔴 Stop all music before slide change
+        pauseAllAudio(); // 🔇 pause any playing audio
 
         // Hide all slides
         document.querySelectorAll('.slide').forEach(slide => {
@@ -309,7 +306,15 @@
         currentSlideElement.classList.remove('hidden', 'slide-enter');
         currentSlideElement.classList.add('slide-active');
 
-        // Update track counter
+        // ✅ Play final background music on Slide 6
+        if (slideNumber === 6) {
+            const finalAudio = document.getElementById('finalAudio');
+            if (finalAudio) {
+                finalAudio.play();
+            }
+        }
+
+        // Update track counter (optional if showing 1–5 only)
         document.getElementById('currentTrack').textContent = slideNumber;
 
         // Update dots
@@ -369,8 +374,8 @@
         }
     });
 
-    // Initialize
     updateNavigation();
 </script>
+
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9620ed55d3cb0719',t:'MTc1Mjk5ODQ0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
