@@ -1,70 +1,76 @@
-/* Reset and base styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
 
 body {
-  background: linear-gradient(120deg, #121212, #1db954);
-  color: #fff;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(to right, #1db954, #191414);
+  color: white;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+#intro-screen {
+  text-align: center;
+  animation: fadeIn 1s ease;
+}
+
+#intro-screen h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+#start-btn {
+  padding: 15px 30px;
+  font-size: 1.2em;
+  background-color: #1db954;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#start-btn:hover {
+  transform: scale(1.05);
+}
+
+.container {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  min-height: 100vh;
-  padding: 20px;
-}
-
-/* Header */
-header {
-  margin-top: 20px;
-}
-
-header h1 {
-  font-size: 2.5rem;
-  margin-bottom: 10px;
-}
-
-/* Playlist container */
-.playlist {
-  width: 100%;
+  width: 90%;
   max-width: 600px;
-  position: relative;
 }
 
-/* Individual song card (slide) */
 .song-card {
   display: none;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   animation: fadeIn 0.6s ease forwards;
   transition: opacity 0.6s ease;
   padding: 30px;
-  min-height: 70vh;
+  border-radius: 15px;
 }
 
 .song-card.active {
   display: flex;
 }
 
-/* Album cover */
 .cover {
-  width: 250px;
-  height: 250px;
-  border-radius: 10px;
-  margin-bottom: 20px;
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
   object-fit: cover;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+  margin-bottom: 20px;
 }
 
-/* Song title & text */
-.song-info h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  color: #1db954;
+h2 {
+  font-size: 24px;
+  margin: 10px 0;
 }
 
 .lyrics {
@@ -73,44 +79,44 @@ header h1 {
 }
 
 .message {
-  margin-bottom: 15px;
+  margin: 10px 0;
+  font-weight: 300;
 }
 
-/* Audio player */
 audio {
-  margin-top: 10px;
+  margin-top: 15px;
   width: 100%;
 }
 
-/* Nav buttons */
-.nav-buttons {
+.nav {
+  margin-top: 20px;
   display: flex;
   justify-content: center;
-  margin-top: 30px;
+  gap: 20px;
 }
 
-.nav-buttons button {
-  background-color: transparent;
+.nav button {
+  font-size: 24px;
+  padding: 10px 20px;
+  background-color: #1db954;
   border: none;
-  font-size: 2rem;
+  border-radius: 50px;
   cursor: pointer;
-  margin: 0 30px;
-  transition: transform 0.2s;
+  color: white;
+  transition: transform 0.3s ease;
 }
 
-.nav-buttons button:hover {
-  transform: scale(1.2);
+.nav button:hover {
+  transform: scale(1.1);
 }
 
-/* Footer */
-footer {
-  margin-top: 40px;
-  font-size: 0.9rem;
-  color: #ccc;
-}
-
-/* Animations */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
