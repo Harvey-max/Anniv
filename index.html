@@ -2,48 +2,80 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Our Playlist</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Anniversary Album</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
-    <h1>💚 Our Love Playlist 💚</h1>
-    <p>For our 1st anniversary</p>
+    <h1>Happy Anniversary 💚</h1>
+    <p>Our Playlist of Memories</p>
   </header>
 
   <main class="playlist">
-    <!-- Song 1 -->
+    <!-- Slide 1 -->
     <div class="song-card">
-      <img src="images/palagi.jpg" alt="Palagi Cover" class="cover" />
+      <img src="images/your-image-1.jpg" alt="Cover 1" class="cover"/>
       <div class="song-info">
-        <h2>Palagi</h2>
-        <p class="lyrics">"Di ka mawala sa isip ko..."</p>
-        <p class="message">This is the song that reminds me of how much I miss you every day.</p>
+        <h2>Palagi - TJ Monterde</h2>
+        <p class="lyrics">"Kahit kailan, kahit saan..."</p>
+        <p class="message">This reminds me of how I feel every time we talk. I’ll always choose you.</p>
         <audio controls>
-          <source src="audio/palagi.mp3" type="audio/mpeg" />
+          <source src="audio/palagi.mp3" type="audio/mpeg">
+          Your browser does not support the audio tag.
         </audio>
       </div>
     </div>
 
-    <!-- Duplicate this block for more songs -->
-    <!-- Song 2 -->
+    <!-- Slide 2 -->
     <div class="song-card">
-      <img src="images/iloveyou.jpg" alt="I Love You Cover" class="cover" />
+      <img src="images/your-image-2.jpg" alt="Cover 2" class="cover"/>
       <div class="song-info">
-        <h2>I Will Always Love You</h2>
-        <p class="lyrics">"And I... will always love you..."</p>
-        <p class="message">One day, I’ll sing this to you while holding your hand. Forever is our tune.</p>
+        <h2>I Will Always Love You - Whitney Houston</h2>
+        <p class="lyrics">"And I will always love you..."</p>
+        <p class="message">Every lyric of this song speaks what’s in my heart — my love is constant and true.</p>
         <audio controls>
-          <source src="audio/alwaysloveu.mp3" type="audio/mpeg" />
+          <source src="audio/always-love-you.mp3" type="audio/mpeg">
+          Your browser does not support the audio tag.
         </audio>
       </div>
     </div>
-
   </main>
 
+  <!-- Navigation Buttons -->
+  <div class="nav-buttons">
+    <button id="prev"><span>💚</span></button>
+    <button id="next"><span>💚</span></button>
+  </div>
+
   <footer>
-    <p>Made with 💚 by you, for her — 2025</p>
+    <p>Made with all my heart, for you 💚</p>
   </footer>
+
+  <!-- Slide Script -->
+  <script>
+    const cards = document.querySelectorAll('.song-card');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+    let current = 0;
+
+    function showCard(index) {
+      cards.forEach((card, i) => {
+        card.style.display = i === index ? 'flex' : 'none';
+      });
+    }
+
+    prevBtn.addEventListener('click', () => {
+      current = (current - 1 + cards.length) % cards.length;
+      showCard(current);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      current = (current + 1) % cards.length;
+      showCard(current);
+    });
+
+    showCard(current); // Show first card initially
+  </script>
 </body>
 </html>
