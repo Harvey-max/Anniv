@@ -1,53 +1,115 @@
-body {
+/* Reset default */
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styling */
+body {
   font-family: 'Segoe UI', sans-serif;
-  background: url('images/background.jpg') no-repeat center center fixed;
-  background-size: cover;
-  color: white;
-  scroll-behavior: smooth;
+  background: linear-gradient(135deg, #1f1f1f, #121212);
+  color: #fff;
+  overflow-x: hidden;
 }
 
-.album {
-  backdrop-filter: blur(4px);
-  padding: 40px;
-}
-
-.song-section {
-  margin-bottom: 100px;
+/* Header */
+header {
   text-align: center;
-  padding: 30px;
-  border-radius: 20px;
-  background-color: rgba(0, 0, 0, 0.6);
+  padding: 2rem;
+  background: #222;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+header h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+header p {
+  font-size: 1.2rem;
+  color: #ccc;
 }
 
-.lyrics {
-  font-size: 1.5em;
-  font-weight: bold;
-  margin: 20px 0;
-  color: #ffcccc;
+/* Slide container */
+.slide {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 1rem;
+  min-height: 100vh;
+  animation: fadeIn 1s ease-in-out;
+}
+.slide.active {
+  display: flex;
 }
 
+/* Album image */
+.album-cover {
+  max-width: 300px;
+  width: 80%;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+/* Lyric styling */
+.lyric {
+  font-size: 1.5rem;
+  font-style: italic;
+  margin-bottom: 1rem;
+  color: #ffb6c1;
+  text-align: center;
+}
+
+/* Message styling */
 .message {
-  font-size: 1.1em;
-  margin: 20px 0;
-  color: #eeeeee;
+  font-size: 1.1rem;
+  color: #ddd;
+  text-align: center;
+  max-width: 600px;
+  margin-bottom: 2rem;
 }
 
+/* Audio styling */
 audio {
-  margin-top: 20px;
-  width: 100%;
-  max-width: 400px;
+  margin-bottom: 2rem;
 }
 
-/* Fade-in animation */
-.fade-in {
-  opacity: 0;
-  transform: translateY(40px);
-  animation: fadeInUp 1s ease forwards;
+/* Navigation buttons */
+.nav-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+button {
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #ff6b81;
+  color: white;
+  transition: background 0.3s;
+}
+button:hover {
+  background-color: #ff4757;
 }
 
-@keyframes fadeInUp {
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem;
+  background: #111;
+  font-size: 1rem;
+  color: #888;
+}
+
+/* Fade animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
