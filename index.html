@@ -1,65 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Happy Anniversary</title>
-  <style>
-    body {
-      background: linear-gradient(to bottom right, #ffe0ec, #fff0f5);
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-      padding: 50px;
-      color: #333;
-    }
-    h1 {
-      font-size: 36px;
-      color: #d63384;
-    }
-    .heart {
-      font-size: 80px;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-      margin-top: 20px;
-    }
-    .heart:hover {
-      transform: scale(1.2);
-    }
-    #message {
-      display: none;
-      margin-top: 40px;
-      font-size: 20px;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-      background: #fff;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Love Album</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <h1>Happy 1st Anniversary, My Love 💖</h1>
-  <p>Click the heart to reveal your surprise</p>
-  <div class="heart" onclick="showMessage()">❤️</div>
+  <div class="album">
+    
+    <!-- Example Section (Duplicate and edit as needed) -->
+    <section class="song-section fade-in">
+      <h1>🎵 "SONG TITLE HERE"</h1>
+      <p class="lyrics">"Insert meaningful lyric here"</p>
+      <p class="message">Write your heartfelt message here...</p>
+      <audio controls>
+        <source src="audio/song1.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
+    </section>
 
-  <div id="message">
-    <p>
-      My love, thank you for sticking with me even from miles away.  
-      You’ve always understood me, never asked for more than I could give,  
-      and I’ll never forget how patient and kind you’ve been.  
-      This might just be a simple page, but it’s built from my heart.  
-      I love you, and one day, I’ll make it up to you — I promise. 💌
-    </p>
-    <p>— Your boyfriend, [Your Name]</p>
+    <!-- Copy the section below and paste for each song -->
+    <section class="song-section fade-in">
+      <h1>🎵 "Next Song Title"</h1>
+      <p class="lyrics">"Another lyric line"</p>
+      <p class="message">Your love letter message here...</p>
+      <audio controls>
+        <source src="audio/song2.mp3" type="audio/mpeg">
+      </audio>
+    </section>
+
+    <!-- Keep duplicating until 5-8 songs are done -->
+
   </div>
 
-  <script>
-    function showMessage() {
-      document.getElementById("message").style.display = "block";
-    }
-  </script>
-
+  <script src="script.js"></script>
 </body>
 </html>
