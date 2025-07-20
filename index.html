@@ -261,90 +261,100 @@
     </div>
 
     <script>
-        let currentSlide = 1;
-        const totalSlides = 5;
+    let currentSlide = 1;
+    const totalSlides = 5;
 
-        function startJourney() {
-            document.getElementById('introPage').classList.add('hidden');
-            document.getElementById('playerInterface').classList.remove('hidden');
-            updateNavigation();
-        }
+    function startJourney() {
+        document.getElementById('introPage').classList.add('hidden');
+        document.getElementById('playerInterface').classList.remove('hidden');
+        updateNavigation();
+    }
 
-        function showSlide(slideNumber) {
-            // Hide all slides
-            document.querySelectorAll('.slide').forEach(slide => {
-                slide.classList.add('hidden');
-                slide.classList.remove('slide-active');
-                slide.classList.add('slide-enter');
-            });
+    function pauseAllAudio() {
+        const audios = document.querySelectorAll("audio");
+        audios.forEach(audio => {
+            audio.pause();
+            audio.currentTime = 0; // Optional: reset to start
+        });
+    }
 
-            // Show current slide
-            const currentSlideElement = document.querySelector(`[data-slide="${slideNumber}"]`);
-            currentSlideElement.classList.remove('hidden', 'slide-enter');
-            currentSlideElement.classList.add('slide-active');
+    function showSlide(slideNumber) {
+        pauseAllAudio(); // 🔴 Stop all music before slide change
 
-            // Update track counter
-            document.getElementById('currentTrack').textContent = slideNumber;
+        // Hide all slides
+        document.querySelectorAll('.slide').forEach(slide => {
+            slide.classList.add('hidden');
+            slide.classList.remove('slide-active');
+            slide.classList.add('slide-enter');
+        });
 
-            // Update dots
-            document.querySelectorAll('.dot').forEach((dot, index) => {
-                if (index + 1 === slideNumber) {
-                    dot.classList.remove('bg-gray-600');
-                    dot.classList.add('bg-spotify-green');
-                } else {
-                    dot.classList.remove('bg-spotify-green');
-                    dot.classList.add('bg-gray-600');
-                }
-            });
+        // Show current slide
+        const currentSlideElement = document.querySelector(`[data-slide="${slideNumber}"]`);
+        currentSlideElement.classList.remove('hidden', 'slide-enter');
+        currentSlideElement.classList.add('slide-active');
 
-            updateNavigation();
-        }
+        // Update track counter
+        document.getElementById('currentTrack').textContent = slideNumber;
 
-        function nextSlide() {
-            if (currentSlide < totalSlides) {
-                currentSlide++;
-                showSlide(currentSlide);
-            }
-        }
-
-        function previousSlide() {
-            if (currentSlide > 1) {
-                currentSlide--;
-                showSlide(currentSlide);
-            }
-        }
-
-        function updateNavigation() {
-            const prevBtn = document.getElementById('prevBtn');
-            const nextBtn = document.getElementById('nextBtn');
-
-            prevBtn.disabled = currentSlide === 1;
-            nextBtn.disabled = currentSlide === totalSlides;
-
-            if (currentSlide === 1) {
-                prevBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        // Update dots
+        document.querySelectorAll('.dot').forEach((dot, index) => {
+            if (index + 1 === slideNumber) {
+                dot.classList.remove('bg-gray-600');
+                dot.classList.add('bg-spotify-green');
             } else {
-                prevBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-            }
-
-            if (currentSlide === totalSlides) {
-                nextBtn.classList.add('opacity-50', 'cursor-not-allowed');
-            } else {
-                nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
-            }
-        }
-
-        // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowRight' && currentSlide < totalSlides) {
-                nextSlide();
-            } else if (e.key === 'ArrowLeft' && currentSlide > 1) {
-                previousSlide();
+                dot.classList.remove('bg-spotify-green');
+                dot.classList.add('bg-gray-600');
             }
         });
 
-        // Initialize
         updateNavigation();
-    </script>
+    }
+
+    function nextSlide() {
+        if (currentSlide < totalSlides) {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+    }
+
+    function previousSlide() {
+        if (currentSlide > 1) {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+    }
+
+    function updateNavigation() {
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        prevBtn.disabled = currentSlide === 1;
+        nextBtn.disabled = currentSlide === totalSlides;
+
+        if (currentSlide === 1) {
+            prevBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        } else {
+            prevBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        }
+
+        if (currentSlide === totalSlides) {
+            nextBtn.classList.add('opacity-50', 'cursor-not-allowed');
+        } else {
+            nextBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+        }
+    }
+
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowRight' && currentSlide < totalSlides) {
+            nextSlide();
+        } else if (e.key === 'ArrowLeft' && currentSlide > 1) {
+            previousSlide();
+        }
+    });
+
+    // Initialize
+    updateNavigation();
+</script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9620ed55d3cb0719',t:'MTc1Mjk5ODQ0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
